@@ -8,7 +8,7 @@ function Nav() {
 	return (
 		<nav className="h-[100px] fixed left-0 bottom-0 w-full ">
 			<div className='h-full max-w-xl mx-auto py-1 flex items-center justify-around bg-green-900 border-t border-gray-600 text-white'>
-				<Link className={cls("transition-all px-2 py-2 rounded-full hover:text-yellow-500 flex flex-col items-center ", currentPath === "/myArea" ? "text-yellow-400" : "")} to="/myArea">
+				<Link className={cls("transition-all px-2 py-2 rounded-full hover:text-yellow-500 flex flex-col items-center ", currentPath === "/" ? "text-yellow-400" : "")} to="/">
 					<span className='text-xs'>내 지역</span>
 					<svg
 						className="h-8 w-8"

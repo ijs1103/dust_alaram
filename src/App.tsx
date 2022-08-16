@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/myArea" element={<MyArea />} />
+        <Route path="/" element={<MyArea />} />
         <Route path="/entireArea" element={<EntireArea />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/*" element={<p>Not Found</p>} />

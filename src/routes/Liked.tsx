@@ -12,7 +12,7 @@ function Liked() {
 	console.log(likedDust)
 	return (
 		<Layout title='즐겨찾기'>
-			{loading ? <Loader /> : likedDust.length > 0 ? likedDust.map(cur => <Card key={cur.stationName} {...cur} />) : <NotFound />}
+			{loading ? <Loader /> : likedDust.length > 0 ? likedDust.map(cur => <Card key={cur.stationName} {...cur} />) : <NotFound type='즐겨찾기' />}
 		</Layout>
 	)
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import Select from '~/components/Select'
 import Card from '~/components/Card'
 import { useAppSelector } from '~/store'
-
+import NotFound from '~/components/NotFound'
 
 function MyArea() {
 	const dustState = useAppSelector(state => state.dust)
@@ -11,7 +11,7 @@ function MyArea() {
 	return (
 		<Layout title='내 지역'>
 			<Select />
-			{dustState.myAreaDust && <Card {...dustState.myAreaDust} />}
+			{dustState.myAreaDust ? <Card {...dustState.myAreaDust} /> : <NotFound type='내 지역' />}
 		</Layout>
 	)
 }

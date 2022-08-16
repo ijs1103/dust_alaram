@@ -1,8 +1,8 @@
 import React from 'react'
 
-function NotFound() {
+function NotFound({ type }: { type: string }) {
 	return (
-		<span className='fixed top-1/3 left-1/2 -translate-x-1/2 text-3xl text-gray-700'>즐겨찾기한 지역이 없습니다</span>
+		<span className='fixed top-1/3 left-1/2 -translate-x-1/2 text-3xl text-gray-700'>{type} 설정 해주세요.</span>
 	)
 }
 
