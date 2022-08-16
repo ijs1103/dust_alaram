@@ -1,20 +1,20 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export interface dustData {
+export interface IDustData {
   sidoName: string;
   stationName: string;
-  dateTime: string;
+  dataTime: string;
   pm10Grade: string;
   pm10Value: string;
   isLiked: boolean;
 }
 
 export interface DustState {
-  dustDataArr: dustData[];
-  likedDust: dustData[];
-  myAreaDust: dustData | null;
-  initDust: dustData | null;
+  dustDataArr: IDustData[];
+  likedDust: IDustData[];
+  myAreaDust: IDustData | null;
+  initDust: IDustData | null;
   error: string | null | undefined;
   loading: boolean;
 }
@@ -28,7 +28,7 @@ const initialState: DustState = {
   loading: false,
 };
 
-export const fetchDust = createAsyncThunk<dustData[], string>(
+export const fetchDust = createAsyncThunk<IDustData[], string>(
   "fetchDust",
   async (sidoName: string) => {
     try {
@@ -58,9 +58,13 @@ const dustSlice = createSlice({
   name: "dust",
   initialState,
   reducers: {
-    // payload: dustData
+    // payload: stationName
     setMyArea(state, action) {
-      state.myAreaDust = action.payload;
+      const myArea = state.dustDataArr.find(
+        (cur) => cur.stationName === action.payload
+      );
+      if (!myArea) return;
+      state.myAreaDust = myArea;
     },
     // payload: dustData
     addLike(state, action) {

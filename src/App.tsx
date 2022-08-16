@@ -8,7 +8,6 @@ import Liked from "~/routes/Liked"
 import Nav from "~/components/Nav"
 
 function App() {
-  const dustState = useAppSelector(state => state.dust)
 
   return (
     <BrowserRouter>
