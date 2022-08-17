@@ -1,5 +1,9 @@
 # dust_alaram
 
+## 🔗 배포 링크
+
+https://dust-alert.vercel.app/
+
 ## ✅ 요구사항
 
 - 미세먼지 정보를 표시하기 위한 카드 형태의 컴포넌트 제작
