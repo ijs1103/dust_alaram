@@ -3,10 +3,9 @@ import Card from '~/components/Card'
 import Layout from '~/components/Layout'
 import Loader from '~/components/Loader'
 import NotFound from '~/components/NotFound'
-import { useAppDispatch, useAppSelector } from "~/store"
+import { useAppSelector } from "~/store"
 
 function Liked() {
-	const dispatch = useAppDispatch()
 	const { loading, dustDataArr, likedDust } = useAppSelector(state => state.dust)
 
 	console.log(likedDust)

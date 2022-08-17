@@ -11,7 +11,6 @@ function EntireArea() {
 	useEffect(() => {
 		dispatch(fetchDust('전국'))
 	}, [])
-	console.log(likedDust)
 	return (
 		<Layout title="전체 지역">
 			{loading ? <Loader /> : dustDataArr?.map(cur => <Card key={cur.stationName} {...cur} />)}
