@@ -8,10 +8,9 @@ import { useAppSelector } from "~/store"
 function Liked() {
 	const { loading, dustDataArr, likedDust } = useAppSelector(state => state.dust)
 
-	console.log(likedDust)
 	return (
 		<Layout title='즐겨찾기'>
-			{loading ? <Loader /> : likedDust.length > 0 ? likedDust.map(cur => <Card key={cur.stationName} {...cur} />) : <NotFound type='즐겨찾기' />}
+			{loading ? <Loader /> : likedDust.length > 0 ? likedDust.map(cur => <Card key={cur.stationName} data={{ ...cur }} isLikedCard={true} />) : <NotFound type='즐겨찾기' />}
 		</Layout>
 	)
 }

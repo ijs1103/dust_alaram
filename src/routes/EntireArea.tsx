@@ -13,7 +13,7 @@ function EntireArea() {
 	}, [])
 	return (
 		<Layout title="전체 지역">
-			{loading ? <Loader /> : dustDataArr?.map(cur => <Card key={cur.stationName} {...cur} />)}
+			{loading ? <Loader /> : dustDataArr?.map(cur => <Card key={cur.stationName} data={{ ...cur }} />)}
 		</Layout>
 	)
 }

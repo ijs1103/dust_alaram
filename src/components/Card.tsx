@@ -3,13 +3,26 @@ import { useAppDispatch, useAppSelector } from "~/store"
 import { addLike, removeLike, IDustData } from '~/store/slice/dustSlice'
 import { cls } from '~/utils'
 import { gradeToKR, gradeToColor } from '~/utils/constants'
+interface Props {
+	data: IDustData
+	isLikedCard?: boolean
+}
 
-function Card(data: IDustData) {
+
+function Card({ data, isLikedCard = false }: Props) {
 	const dispatch = useAppDispatch()
 	const starRef = useRef<SVGSVGElement | null>(null)
 	const [isLikeCliked, setIsLikeCliked] = useState(false)
+	const [removeLikeClicked, setRemoveLikeCliked] = useState(false)
 	const handleLikeClick = () => {
 		if (!starRef.current) return
+		// 즐겨찾기 페이지에서 동작하는 로직
+		if (isLikedCard) {
+			dispatch(removeLike(data.stationName))
+			setRemoveLikeCliked(prev => !prev)
+			return
+		}
+		// 내 지역, 전체지역 페이지에서 동작하는 로직
 		if (isLikeCliked) {
 			dispatch(removeLike(data.stationName))
 			starRef.current.style.fill = 'transparent'
@@ -19,6 +32,7 @@ function Card(data: IDustData) {
 		}
 		setIsLikeCliked(prev => !prev)
 	}
+
 	return (
 		<div className={cls('w-[300px] h-[250px] rounded-xl text-white transition-colors duration-500 hover:brightness-110 select-none ', data.pm10Grade ? gradeToColor[data.pm10Grade] : 'bg-gray-700')}>
 			<div className='w-full p-3 relative'>
