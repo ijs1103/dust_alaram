@@ -12,25 +12,21 @@ interface Props {
 function Card({ data, isLikedCard = false }: Props) {
 	const dispatch = useAppDispatch()
 	const starRef = useRef<SVGSVGElement | null>(null)
-	const [isLikeCliked, setIsLikeCliked] = useState(false)
-	const [removeLikeClicked, setRemoveLikeCliked] = useState(false)
 	const handleLikeClick = () => {
 		if (!starRef.current) return
 		// 즐겨찾기 페이지에서 동작하는 로직
 		if (isLikedCard) {
 			dispatch(removeLike(data.stationName))
-			setRemoveLikeCliked(prev => !prev)
 			return
 		}
 		// 내 지역, 전체지역 페이지에서 동작하는 로직
-		if (isLikeCliked) {
+		if (data?.isLiked) {
 			dispatch(removeLike(data.stationName))
 			starRef.current.style.fill = 'transparent'
 		} else {
 			dispatch(addLike(data))
 			starRef.current.style.fill = 'rgb(253 224 71)'
 		}
-		setIsLikeCliked(prev => !prev)
 	}
 
 	return (

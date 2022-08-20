@@ -30,11 +30,11 @@ const gradeToKR: IEnum = {
 } as const;
 
 const gradeToColor: IEnum = {
-  "1": "bg-green-500",
-  "2": "bg-blue-500",
-  "3": "bg-red-300",
-  "4": "bg-red-500",
-  "5": "bg-red-800",
+  1: "bg-green-500",
+  2: "bg-blue-500",
+  3: "bg-red-300",
+  4: "bg-red-500",
+  5: "bg-red-800",
 } as const;
 
 export { SIDO_ARR, gradeToKR, gradeToColor };

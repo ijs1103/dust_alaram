@@ -28,32 +28,43 @@ const initialState: DustState = {
   loading: false,
 };
 
-export const fetchDust = createAsyncThunk<IDustData[], string>(
-  "fetchDust",
-  async (sidoName: string) => {
-    try {
-      const res = await axios.get(
-        "/api/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty",
-        {
-          params: {
-            sidoName,
-            serviceKey: import.meta.env.VITE_APP_KEY,
-            returnType: "json",
-            numOfRows: "100",
-            pageNo: "1",
-            ver: "1.0",
-          },
-        }
-      );
-      return res.data.response.body.items.map((cur: any) => {
-        return { ...cur, isLiked: false };
-      });
-    } catch (error) {
-      console.log(error);
+export const fetchDust = createAsyncThunk<
+  IDustData[],
+  string,
+  { rejectValue: string }
+>("fetchDust", async (sidoName: string, { rejectWithValue }) => {
+  try {
+    const res = await axios.get(
+      "/api/B552584/ArpltnInforInqireSvc/getCtprvnRltmMesureDnsty",
+      {
+        params: {
+          sidoName,
+          serviceKey: import.meta.env.VITE_APP_KEY,
+          returnType: "json",
+          numOfRows: "100",
+          pageNo: "1",
+          ver: "1.0",
+        },
+      }
+    );
+    return res.data.response.body.items.map((cur: any) => {
+      return { ...cur, isLiked: false };
+    });
+  } catch (error: any) {
+    let errorMsg = "";
+    if (error?.response) {
+      const {
+        response: { status },
+      } = error;
+      errorMsg = `status: ${status}`;
+    } else if (error?.request) {
+      errorMsg = "요청이 전송되었지만, 응답이 수신되지 않았습니다.";
+    } else {
+      errorMsg = error?.message;
     }
+    return rejectWithValue(errorMsg);
   }
-);
-
+});
 const dustSlice = createSlice({
   name: "dust",
   initialState,
@@ -87,8 +98,8 @@ const dustSlice = createSlice({
       state.dustDataArr = payload;
       state.loading = false;
     });
-    builder.addCase(fetchDust.rejected, (state, action) => {
-      state.error = action.error.message;
+    builder.addCase(fetchDust.rejected, (state, { payload }) => {
+      state.error = payload;
       state.loading = false;
     });
     builder.addCase(fetchDust.pending, (state) => {
