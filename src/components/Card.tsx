@@ -6,14 +6,15 @@ import { gradeToKR, gradeToColor } from '~/utils/constants'
 interface Props {
 	data: IDustData
 	isLikedCard?: boolean
+	isMyArea?: boolean
 }
 
 
-function Card({ data, isLikedCard = false }: Props) {
+function Card({ data, isLikedCard = false, isMyArea = false }: Props) {
 	const dispatch = useAppDispatch()
 	const starRef = useRef<SVGSVGElement | null>(null)
 	const handleLikeClick = () => {
-		if (!starRef.current) return
+		if (!starRef.current || isMyArea) return
 		// 즐겨찾기 페이지에서 동작하는 로직
 		if (isLikedCard) {
 			dispatch(removeLike(data.stationName))

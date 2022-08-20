@@ -11,7 +11,7 @@ function MyArea() {
 	return (
 		<Layout title='내 지역'>
 			<Select />
-			{dustState.myAreaDust ? <Card data={{ ...dustState.myAreaDust }} /> : <NotFound type='내 지역' />}
+			{dustState.myAreaDust ? <Card data={{ ...dustState.myAreaDust }} isMyArea={true} /> : <NotFound type='내 지역' />}
 		</Layout>
 	)
 }
